@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
+# By: Carlos Tivan 
+
 class Calculator:
     def __init__(self, window):
         self.window = window
