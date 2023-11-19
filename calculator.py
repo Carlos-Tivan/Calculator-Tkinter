@@ -1,12 +1,22 @@
+# Importing the necessary modules from the Tkinter library
 import tkinter as tk
 from tkinter import ttk
 
-# By: Carlos Tivan 
+#By: Carlos Tivan 
 
+# Define the Class 
 class Calculator:
     def __init__(self, window):
+
+        """
+        Constructor method to initialize the Calculator object
+
+         Parameters:
+            - window: Tkinter window object where the calculator will be displayed.
+        """
+
         self.window = window
-        self.window.title("Calculator")
+        self.window.title("Calculator") # Set the windows title 
         
         # Entry widget to display the calculations
         self.entry = ttk.Entry(window, width=20, font=('Courier New', 16))
@@ -27,20 +37,32 @@ class Calculator:
         col_val = 0
         for button in buttons:
             ttk.Button(window, text=button, command=lambda btn=button: self.button_click(btn)).grid(row=row_val, column=col_val, ipadx=10, ipady=10)
+            print(button)
+
             col_val += 1
             if col_val > 4:
                 col_val = 0
                 row_val += 1
 
     def button_click(self, button):
+
+        """
+        Event handler for button clicks. Performs actions based on the clicked button.
+
+        Parameters:
+            - button: The text of the clicked button.
+        """
         current_entry_text = self.entry.get()
 
         if button == '=':
+            # Calculate and display the result when '=' is clicked
             try:
                 result = eval(current_entry_text)
                 self.entry.delete(0, tk.END)  # condition division by zero 
                 self.entry.insert(tk.END, str(round(result, 3)))
+
             except Exception as e:
+                 # Handle syntax errors
                 self.entry.delete(0, tk.END)
                 self.entry.insert(tk.END, "Syntax Error")
 
@@ -53,7 +75,9 @@ class Calculator:
                 result = eval(current_entry_text) / 100
                 self.entry.delete(0, tk.END)
                 self.entry.insert(tk.END, str(result))
+                
             except Exception as e:
+                 # Handle syntax errors
                 self.entry.delete(0, tk.END)
                 self.entry.insert(tk.END, "Syntax Error")
 
